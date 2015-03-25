@@ -41,6 +41,6 @@ Pod::Spec.new do |m|
   m.dependency 'SMCalloutView', '2.0.3'
 
   m.module_name = 'Mapbox'
-  m.public_header_files = 'MapView/Map/Mapbox.h'
+  m.public_header_files = 'MapView/Map/*.h'
 
 end
