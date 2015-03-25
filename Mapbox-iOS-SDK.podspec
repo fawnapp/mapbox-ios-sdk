@@ -40,4 +40,7 @@ Pod::Spec.new do |m|
   m.dependency 'GRMustache', '7.3.0'
   m.dependency 'SMCalloutView', '2.0.3'
 
+  m.module_name = 'Mapbox'
+  m.public_header_files = 'MapView/Map/Mapbox.h'
+
 end
