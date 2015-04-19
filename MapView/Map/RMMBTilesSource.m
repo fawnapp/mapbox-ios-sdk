@@ -53,7 +53,7 @@
 
 - (id)initWithTileSetResource:(NSString *)name ofType:(NSString *)extension
 {
-    return [self initWithTileSetURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:name ofType:extension]]];
+    return [self initWithTileSetURL:[NSURL fileURLWithPath:[[NSBundle bundleForClass:RMMBTilesSource.class] pathForResource:name ofType:extension]]];
 }
 
 - (id)initWithTileSetURL:(NSURL *)tileSetURL
