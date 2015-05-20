@@ -456,9 +456,9 @@
 
 + (NSString *)pathForBundleResourceNamed:(NSString *)name ofType:(NSString *)extension
 {
-    NSAssert([[NSBundle bundleForClass:RMMapView.class] pathForResource:@"Mapbox" ofType:@"bundle"], @"Resource bundle not found in application.");
+    NSAssert([[NSBundle bundleForClass:[self class]] pathForResource:@"Mapbox" ofType:@"bundle"], @"Resource bundle not found in application.");
 
-    NSString *bundlePath      = [[NSBundle bundleForClass:RMMapView.class] pathForResource:@"Mapbox" ofType:@"bundle"];
+    NSString *bundlePath      = [[NSBundle bundleForClass:[self class]] pathForResource:@"Mapbox" ofType:@"bundle"];
     NSBundle *resourcesBundle = [NSBundle bundleWithPath:bundlePath];
 
     return [resourcesBundle pathForResource:name ofType:extension];
@@ -3319,7 +3319,9 @@
         //
         if ([CLLocationManager instancesRespondToSelector:@selector(requestWhenInUseAuthorization)])
         {
-            NSAssert([[NSBundle bundleForClass:RMMapView.class] objectForInfoDictionaryKey:@"NSLocationWhenInUseUsageDescription"], @"For iOS 8 and above, your app must have a value for NSLocationWhenInUseUsageDescription in its Info.plist");
+            BOOL hasLocationDescription = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationWhenInUseUsageDescription"] ||
+                [[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationAlwaysUsageDescription"];
+            NSAssert(hasLocationDescription, @"For iOS 8 and above, your app must have a value for NSLocationWhenInUseUsageDescription or NSLocationAlwaysUsageDescription in its Info.plist");
             [_locationManager requestWhenInUseAuthorization];
         }
 #endif
